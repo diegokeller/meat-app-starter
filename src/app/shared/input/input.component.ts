@@ -11,7 +11,7 @@ export class InputComponent implements OnInit, AfterContentInit {
 
   @Input() label: string
   @Input() errorMessage: string
-
+  
   @ContentChild(NgModel) model: NgModel
 
   constructor() { }
