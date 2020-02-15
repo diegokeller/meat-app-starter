@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable'
 
 import {RestaurantsService} from '../../restaurants/restaurants.service'
 import { MenuItem } from '../menu-item/menu-item.model';
+import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'mt-menu',
@@ -14,7 +15,8 @@ export class MenuComponent implements OnInit {
   menu: Observable<MenuItem[]>
 
   constructor(private route: ActivatedRoute, 
-    private restaurantsService: RestaurantsService) { }
+    private restaurantsService: RestaurantsService,
+    private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit() {
     this.menu = this.restaurantsService
@@ -22,7 +24,7 @@ export class MenuComponent implements OnInit {
   }
 
   addMenuItem(item: MenuItem) {
-    console.log(item)
+    this.shoppingCartService.addItem(item)
   }
 
 }
