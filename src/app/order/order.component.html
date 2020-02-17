@@ -5,9 +5,6 @@
 <section class="content">
   <section class="invoice">
 
-        {{form.valid}}
-        {{form.value | json}}
-
         <form #form="ngForm" novalidate>
           <div class="row">
             <div class="col-xs-12">
@@ -57,7 +54,7 @@
                 <input type="text" 
                   placeholder="Complemento"
                   class="form-control" 
-                  autocomplete="false" name="optional" ngModel>
+                  autocomplete="false" name="optionalAddress" ngModel>
               </mt-input-container>
             </div>
             <!-- /.col -->
@@ -86,30 +83,14 @@
               <p class="lead">Formas de Pagamento:</p>
 
                 <div class="form-group">
-                   <mt-radio [options]="paymentOptions" name="paymentOption" ngModel></mt-radio>
+                   <mt-radio [options]="paymentOptions" name="paymentOption" ngModel required></mt-radio>
                 </div>
 
             </div>
             <!-- /.col -->
             <div class="col-sm-6 col-xs-12">
               <p class="lead">Frete e Total:</p>
-
-              <div class="table-responsive">
-                <table class="table">
-                  <tbody><tr>
-                    <th style="width:50%">Itens:</th>
-                    <td class="text-right">R$ 20,00</td>
-                  </tr>
-                  <tr>
-                    <th>Frete:</th>
-                    <td class="text-right">R$ 8,00</td>
-                  </tr>
-                  <tr>
-                    <th>Total:</th>
-                    <td class="text-right">R$ 28,00</td>
-                  </tr>
-                </tbody></table>
-              </div>
+              <mt-delivery-costs [delivery]="delivery" [itemsValue]="itemsValue()"></mt-delivery-costs>
             </div>
             <!-- /.col -->
           </div>
@@ -118,7 +99,7 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <a role="button" [class.btn-success]="form.valid" [class.disabled]="!form.valid" href="order-summary.html" class="btn pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
+            <a (click)="checkOrder(form.value)" role="button" [class.btn-success]="form.valid" [class.disabled]="!form.valid || cartItems().length == 0" class="btn pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
             </a>
           </div>
         </div>
