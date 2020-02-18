@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var users_1 = require("./users");
+var api_config_1 = require("./api.config");
 var jwt = require("jsonwebtoken");
 exports.handleAuthentication = function (req, resp) {
     var user = req.body;
@@ -9,7 +10,7 @@ exports.handleAuthentication = function (req, resp) {
         var token = jwt.sign({
             sub: dbUser.email,
             iss: 'meat-api'
-        }, 'meat-api-password');
+        }, api_config_1.apiConfig.secret);
         resp.json({
             name: dbUser.name,
             email: dbUser.email,
