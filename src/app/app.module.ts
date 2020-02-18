@@ -48,9 +48,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
       provide: LOCALE_ID, 
       useValue: 'pt-BR'
     },
+    
     {
       provide: LocationStrategy, useClass: HashLocationStrategy
     }
+    
   ],
   bootstrap: [AppComponent]
 })
