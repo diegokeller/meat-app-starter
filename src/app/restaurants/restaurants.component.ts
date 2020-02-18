@@ -51,13 +51,13 @@ export class RestaurantsComponent implements OnInit {
       })
 
       this.searchControl.valueChanges
-        .debounceTime(500)
-        .distinctUntilChanged()
+        .debounceTime(500) // Ignora eventos repetidos com menos de 500ms
+        .distinctUntilChanged() // Ignora eventos com valores iguais
         .do(term => console.log(term))
-        .switchMap(searchTerm => 
+        .switchMap(searchTerm => // Troca o observer
           this.restaurantsService.getRestaurants(searchTerm)
         )
-        .subscribe(
+        .subscribe( // Atualiza o valor
           restaurants => this.restaurants = restaurants
         )
 
