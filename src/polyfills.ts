@@ -18,7 +18,7 @@ import 'core-js/es6/reflect';
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
 
-import 'intl'
-import 'intl/locale-data/jsonp/pt-BR.js'
+//import 'intl' // ambos depreciados depois do angular 4.3
+//import 'intl/locale-data/jsonp/pt-BR.js'
 
 import 'web-animations-js/web-animations.min.js'
