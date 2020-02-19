@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms'
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms'
 
 import { RadioOption } from 'app/shared/radio/radio-option.model';
 import { OrderService } from './order.service';
@@ -39,9 +39,10 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.orderForm = this.formBuilder.group({
-      name: this.formBuilder.control('', 
-        [Validators.required, Validators.minLength(5)]),
+    this.orderForm = new FormGroup({
+      name: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(5)]
+      }),
       
       email: this.formBuilder.control('', 
         [Validators.required, Validators.pattern(this.emailPattern)]),
@@ -60,7 +61,10 @@ export class OrderComponent implements OnInit {
       
       paymentOption: this.formBuilder.control('', 
         [Validators.required])
-    }, {validator: OrderComponent.equalsTo})
+    }, {
+      validators: [OrderComponent.equalsTo], 
+      updateOn: 'blur'
+    })
 
   }
 
