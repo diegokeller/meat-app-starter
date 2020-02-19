@@ -22,7 +22,7 @@ export class RestaurantsService {
             params = new HttpParams().set('q', search)
         }
 
-        return this.http.get<Restaurant[]>(`${MEAT_API}/restaurants`, {
+        return this.http.get<Restaurant[]>(`${MEAT_API}/restaurantss`, {
             params: params
         })
 
