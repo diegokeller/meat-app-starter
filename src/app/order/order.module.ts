@@ -5,10 +5,13 @@ import { OrderComponent } from "./order.component";
 import { OrderItemsComponent } from "./order-items/order-items.component";
 import { DeliveryCostsComponent } from "./delivery-costs/delivery-costs.component";
 import { SharedModule } from "app/shared/shared.module";
+import { LeaveOrderGuard } from "./leave-order.guard";
 
 const ROUTES: Routes = [
     {
-        path: '', component: OrderComponent
+        path: '', 
+        component: OrderComponent,
+        canDeactivate: [LeaveOrderGuard] // Tem que ser colocado dentro do módulo pois o guard espera o módulo como parâmetros, se fosse no arquivo de rotas o componente não estaria pronto, undefined
     }
 ]
 
