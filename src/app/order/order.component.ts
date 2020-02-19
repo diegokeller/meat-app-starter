@@ -8,7 +8,7 @@ import { CartItem } from 'app/restaurant-detail/shopping-cart/cart-item';
 import {Order, OrderItem} from './order.model'
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 
-import 'rxjs/add/operator/do'
+import {tap} from 'rxjs/operators'
 
 @Component({
   selector: 'mt-order',
@@ -110,9 +110,11 @@ export class OrderComponent implements OnInit {
       })
     console.log(order)
     this.orderService.checkOrder(order)
-      .do((orderId: string) => {
-        this.orderId = orderId
-      })
+      .pipe(
+        tap((orderId: string) => {
+          this.orderId = orderId
+        })
+      )
       .subscribe((orderId: string) => {
         console.log(`Compra concluída: ${orderId}`)
         this.orderService.clear()
